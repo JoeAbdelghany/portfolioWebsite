@@ -1,0 +1,11 @@
+.imageRotate {
+    animation: imageRotate 2.5s linear infinite alternate;
+    @keyframes imageRotate {
+        from {
+            transform: translate(0) rotate(0);
+        }
+        to {
+            transform: translate(2px, 2px) rotate(4deg);
+        }
+    }
+}

@@ -14,6 +14,7 @@ module.exports = {
       },
       colors: {
         'transparent': 'var(--transparent)',
+        'gold': 'var(--gold)',
         'mc': 'var(--mc)',
         'smc': 'var(--smc)',
         'wc': 'var(--wc)',

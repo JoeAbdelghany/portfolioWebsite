@@ -1,0 +1,12 @@
+.project {
+    &:hover {
+        .preview {
+            .img {
+                transform: scale(1.02);
+            }
+        }
+        .status {
+            top: 0.5rem;
+        }
+    }
+}

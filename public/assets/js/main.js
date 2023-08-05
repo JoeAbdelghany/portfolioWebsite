@@ -13,7 +13,8 @@ function setCssProperty(propertyName, propertyValue) {
 function setBodyDataAttribute(AttributeName, AttributeValue) {
     document.body.setAttribute("data-" + AttributeName, AttributeValue);
 }
-fetch('http://127.0.0.1:8000/api/youssef').then(function (results) { return results.json(); }).then(function (data) {
+
+fetch('http://127.0.0.1:8000/api/data').then( res => res.json()).then( data => {
     document.title = data.title;
     // ======================= //
     // === create html meta == //
@@ -25,6 +26,7 @@ fetch('http://127.0.0.1:8000/api/youssef').then(function (results) { return resu
     // === create css variables == //
     // =========================== //
     createCssVariable("hue", data.style.colors.hue);
+    createCssVariable("gold", data.style.colors.gold);
     createCssVariable("mc", data.style.colors.mainColor);
     createCssVariable("smc", data.style.colors.socundMainColor);
     createCssVariable("wc", data.style.colors.whiteColor);

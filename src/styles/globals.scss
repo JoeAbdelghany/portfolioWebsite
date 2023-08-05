@@ -1,156 +1,119 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-// @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;800;900&display=swap');
-$fonts: ('Poppins', 'Bebas_Neue');
+@use "./tailwind";
+@use "./fonts";
+@use "./root";
+@use "./variables" as *;
+@use "./classes";
+@use "./animations";
+@use "./layout";
+@use "./loading";
+
+// =============================================== //
+// ==== add react-slick styles in the project ==== //
+// =============================================== //
+
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+.slick-track {
+    display: flex;
+    column-gap: 1rem;
+}
+
+// ================================== //
+// ==== add fonts in the project ==== //
+// ================================== //
+
 @each $font in $fonts {
-    $font: '/assets/fonts/'+$font+'/index.css';
-    @import url($font);
+    @import url('/assets/fonts/'+$font+'/index.css');
 }
-// .blue {
-//  --main-color: hsl(353, 100%, 78%);
-// --spanish-gray: hsl(0, 0%, 60%);
-// --text-color: hsl(0, 0%, 47%);
-// --gold: hsl(29, 90%, 65%);
-// --bittersweet: hsl(0, 100%, 70%);
-// --free-color: hsl(152, 51%, 52%);
-// --davys-gray: hsl(0, 0%, 33%);a
-// --border-color: hsl(0, 0%, 93%);
-// --white-color: hsl(0, 100%, 100%);
-// --black-color: hsl(0, 0%, 13%);
-// --strong-color: hsl(0, 0%, 27%);
-// --header-width: 80px;
-// --header-color: #ffffff;
-// --blue-color: #287bff;
-// }
-:root {
-    --header-height: 70px;
-    --logoFontFamily: "Bebas Neue";
-    --mb: hsl(0, 0%, 93%);
-    --rounded: 0.25rem;
-    --bg: hsl(0, 0%, 98%);
-    --topIndex: 999;
-        // font weight
-    $fw:0;
-    @while $fw <= 900 {
-        $fw: $fw + 100;
-        --fw-#{$fw}:#{$fw};
-    }
-    // font size
-    @for $fs from 0 to 10 { 
-        --fs-#{$fs}-25: #{$fs}.25rem;
-        --fs-#{$fs}-5: #{$fs}.5rem;
-        --fs-#{$fs}-75: #{$fs}.75rem;
-        --fs-#{$fs}: #{$fs}rem;
-    }
-    // margin bottom
-    $i:0;
-    $positions: ("t","b","r","l","x","y","");
-    @for $i from 0 to 10 {
-        @each $position in $positions {
-            @each $t in ("m","p") {
-                --#{$t}#{$position}-#{$i}-25: #{$i}.25rem;
-                --#{$t}#{$position}-#{$i}-5: #{$i}.5rem;
-                --#{$t}#{$position}-#{$i}-75: #{$i}.75rem;
-                --#{$t}#{$position}-#{$i}: #{$i}rem;
-            }
-        }
-    }
-}
-body {
-    margin-top: var(--header-height);
-    background: var(--lc);
-    font: {
-        family: 'Poppins', sans-serif;
-        size: 16px;
-        weight: 400;
-    }
-}
+
+// ========================================= //
+// ==== custumize scrollbar and section ==== //
+// ========================================= //
+
 ::selection {
-    background-color: var(--mc);
-    color: #fff;
+    background-color: $mc;
+    color: $wc;
 }
-    
+
+// add scroll bar variabels
+
+$scrollSize: 0.25rem;
+$scrollBg: $lc;
+
 ::-webkit-scrollbar {
-    background-color: transparent;
-    width: 0.25rem;
-    height: 0.25rem;
+    background-color: $scrollBg;
+    width: $scrollSize;
+    height: $scrollSize;
 }
     
 ::-webkit-scrollbar-thumb {
-    background-color: var(--mc);
+    background-color: $mc;
     border-radius: 0.5rem;
-    width: 100%;
 }
+
+::-webkit-scrollbar-track {
+    background-color: $scrollBg;
+}
+
+// ::-webkit-scrollbar-button {}
+// ::-webkit-scrollbar-track-piece {}
+
+::-webkit-scrollbar-corner {
+    background-color: $scrollBg;
+}
+
+
 // ============================ //
 // === start formating code === //
 // ============================ //
 
-a {
-    &.active {
-        pointer-events: none;
+html {
+    font-size: 16px;
+}
+
+body {
+        font: {
+            family: 'Poppins', sans-serif;
+            size: 1rem;
+            weight: 400;
+        }
+}
+
+* {
+    transition: 0.25s ease;
+}
+
+input {
+    outline: none;
+    &:focus {
+        &::-webkit-input-placeholder {
+            color: transparent !important;
+        }
+        border: 2px solid $mc;
     }
 }
 
-section {
+header,footer,body {
+    background-color: $lc;
+}
+header,footer,section {
     width:100%;
-    padding: 8rem 0rem 2rem 0rem;
 }
-
-// =========================== //
-// === create main classes === //
-// =========================== //
-
-.container {
-    margin-inline: auto;
-}
-.center {
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-.btn {
-    @extend .center;
-    max-height: 40px;
-    border-radius: 0.25rem;
-    padding: 0.5rem 1.25rem;
-    // text-transform: uppercase;
-    opacity: 0.9;
-    transition: 0.4s;
-    &:hover {
-        opacity: 1;
-    }
-    &.fill {
-        background-color: var(--mc);
-        color: #fff;
-    }
-    &.empty {
-        background-color: var(--smc);
-        color: #fff;
-    }
-    font: {
-        size: var(--fs-1);
-        weight: var(--fw-500);
+section {
+    min-height: 100vh;
+    padding-block: calc($headerHeight + 3rem) 2rem;
+    >h1 {
+        color: $mc;
+        text-align: center;
+        margin-bottom: 3rem;    
+        span {
+            color: $smc;
+        }
     }
 }
 
-@each $color in ('lc','dc', 'mc','tf','smc','bc','wc') {
-    .bg-#{$color} {
-        background-color: var(--#{$color});
-    }
-    .#{$color} {
-        color: var(--#{$color});
-    }
-    .#{$color}h:hover {
-        color: var(--#{$color});
-    }
-}
-
-.tcl {
-    color: var(--tcl);
-}
-
-.desc {
+p {
     color: var(--tcl);
     font: {
         size: 1rem;
@@ -158,13 +121,18 @@ section {
     }
 }
 
-$h-fonts: ('2-75','2-5','2-25','2','1-75','1-5');
+svg {
+    $size: 1.5rem;
+    width: $size;
+    height:$size;
+    transition: 0s;
+}
 
-@for $i from 1 to 6 {
+@each $size, $i in (('2-75',1),('2-5',2),('2-25',3),('2',4),('1-75',5),('1-5',6)) {
     h#{$i} {
-        color: var(--dc);
+        color: $dc;
         font: {
-            size: var(--fs-#{$h-fonts($i - 0)});
+            size: var(--fs-#{$size});
             weight: var(--fw-600);
         }
     }

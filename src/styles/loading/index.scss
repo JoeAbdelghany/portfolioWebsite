@@ -1,0 +1,47 @@
+@use '../variables' as *;
+
+.loading {
+    background: linear-gradient(45deg, #006bc6, #1ecafc);
+    font: {
+        family: 'Happy Monkey';
+    }
+    .container {
+        // h2 {}
+        .loader {
+            $size: 300px;
+            height: $size;
+            width: $size;
+            background-color: rgba(0,0,0,0.25);
+            filter: url(#gooey);
+            span {
+                $size: 100px;
+                $tranlateX: 240px;
+                left: 0;
+                height: $size;
+                width: $size;
+                transform-origin: 150px;
+                animation: animate 5s ease-in-out infinite alternate;
+                animation-delay: calc(0.15s * var(--i));
+                @keyframes animate {
+                    0%,10% {
+                        height: $size;
+                        width: $size;
+                        transform: rotate(0deg) translateX($tranlateX);
+                    }
+                    40%,70% {
+                        $size: 40px;
+                        height: $size;
+                        width: $size;
+                        transform: rotate(calc(360deg / 8 * var(--i))) translateX($tranlateX);
+                        box-shadow: 0 0 0 10px #fff;
+                    }
+                    90%,100% {
+                        height: $size;
+                        width: $size;
+                        transform: rotate(0deg) translateX($tranlateX / 2);
+                    }
+                }
+            }
+        }   
+    }
+}

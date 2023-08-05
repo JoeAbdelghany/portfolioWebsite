@@ -1,0 +1,4 @@
+$fonts: ('Poppins', 'Bebas_Neue','Roboto', 'Happy_Monkey');
+@each $font in $fonts {
+    @import url('/assets/fonts/'+$font+'/index.css');
+}

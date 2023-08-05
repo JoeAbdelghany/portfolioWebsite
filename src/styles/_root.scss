@@ -1,0 +1,28 @@
+:root {
+    --hue: 200;
+    --header-height: 70px;
+    --screen: 100vh;
+    --logoFontFamily: "Bebas Neue";
+    --topIndex: 999;
+    $i: 100;
+    @while $i <= 900 {
+        --fw-#{$i}:#{$i};
+        $i: $i + 100;
+    }
+    @for $i from 0 to 10 { 
+        --fs-#{$i}-25: #{$i}.25rem;
+        --fs-#{$i}-5: #{$i}.5rem;
+        --fs-#{$i}-75: #{$i}.75rem;
+        --fs-#{$i}: #{$i}rem;
+    }
+    @for $i from 0 to 10 {
+        @each $position in ("t","b","r","l","x","y","") {
+            @each $t in ("m","p") {
+                --#{$t}#{$position}-#{$i}-25: #{$i}.25rem;
+                --#{$t}#{$position}-#{$i}-5: #{$i}.5rem;
+                --#{$t}#{$position}-#{$i}-75: #{$i}.75rem;
+                --#{$t}#{$position}-#{$i}: #{$i}rem;
+            }
+        }
+    }
+}

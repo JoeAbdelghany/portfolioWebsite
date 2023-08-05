@@ -12,9 +12,12 @@ const withPWA = nextPwa({
 });
 
 const nextConfig = withPWA({
-  reactStrictMode: true,
+  reactStrictMode: false,
   distDir: 'build',
   pageExtensions: ['jsx', 'js', 'tsx', 'ts'],
+  env: {
+    API_KEY: process.env.API_KEY,
+  },
   // typescript: {
     // ignoreBuildErrors: true,
   // },

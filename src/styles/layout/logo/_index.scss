@@ -1,0 +1,10 @@
+.logo {
+    h1 {
+        letter-spacing: 1px;
+        font: {
+            size: var(--fs-2);
+            weight: var(--fw-600);
+            family: var(--logoFontFamily);
+        }
+    }
+}

@@ -1,42 +1,52 @@
 import { Component } from "react";
-import axios, { AxiosResponse } from 'axios';
-import { Landing, About } from '@/components/home/index';
+import axios from 'axios';
+import { Landing, About, Services, Projects, Reviews } from '@/components/home';
+
+const API_KEY = process.env.API_KEY;
 
 interface Props {
-  data: any,
-  projects: any,
-  ratings: any,
-  users: any,
+    data: {
+        user: Object
+    },
+    reviews: Object[],
+    projects: any[],
+    users: any[],
 };
 
 class Home extends Component<Props> {
-  render() { 
-    const { data, projects, ratings, users } = this.props;
-    const { user } = data;
+    render() {
+        const { data, projects, reviews, users } = this.props;
+        const { user } = data;
 
-    return (
-      <>
-        <Landing user={user} />
-        <About user={user} />
-      </>
-    );
-  }
+        return (
+            <>
+                <Landing user={user} />
+                <About user={user} />
+                <Services />
+                <Projects projects={projects} />
+                <Reviews reviews={reviews} users={users}/>
+            </>
+        );
+    }
 }
 
 export const getStaticProps = async () => {
-  const data = await (await axios.get('http://127.0.0.1:8000/api/youssef')).data;
-  const projects = await (await axios.get('http://127.0.0.1:3000/api/projects')).data;
-  const ratings = await (await axios.get('http://127.0.0.1:3000/api/ratings')).data;
-  const users = await (await axios.get('http://127.0.0.1:3000/api/users')).data;
+    const data = await (await axios.get(`${API_KEY}/api/data`)).data,
 
-  return {
-      props: {
-          data,
-          projects,
-          ratings,
-          users,
-      }
-  };
+        projects = await (await axios.get(`${API_KEY}/api/projects`)).data,
+
+        users = await (await axios.get(`${API_KEY}/api/users`)).data,
+
+        reviews = await (await axios.get(`${API_KEY}/api/reviews`)).data;
+
+    return {
+        props: {
+            data,
+            reviews,
+            projects,
+            users,
+        }
+    };
 }
 
 export default Home;

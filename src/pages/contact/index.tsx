@@ -1,9 +1,10 @@
 import { Component } from 'react';
+import { Landing } from '@/components/contact';
 
 class Contact extends Component { 
     render() {
         return(
-                <h1> Contact </h1>
+                <Landing name="Joe Abdelghany"/>
         )
     }
 }
