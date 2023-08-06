@@ -12,7 +12,7 @@ interface Props {
     projects: any[],
     users: any[],
 };
-
+ 
 class Home extends Component<Props> {
     render() {
         const { data, projects, reviews, users } = this.props;
