@@ -1,8 +1,8 @@
 interface Message {
     userId: string,
     content: string,
-    status: 'admin'| 'user',
-    type: 'text' | 'vidoe' | 'image' | 'audio',
+    status: string,
+    type: string,
 }
 
 type Messages = Message[];
